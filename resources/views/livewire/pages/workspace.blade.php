@@ -67,13 +67,13 @@ $createChannel = fn (string $name) => Channel::create(['name' => $name]);
                             <x-icons.plus
                                 x-show="!openChannelForm"
                                 class="h-5 w-5 text-gray-700"
-                                @click="openChannelForm = !openChannelForm" 
+                                @click="openChannelForm = !openChannelForm"
                             />
 
                             <x-icons.minus
                                 x-show="openChannelForm"
                                 class="h-5 w-5 text-gray-700"
-                                @click="openChannelForm = !openChannelForm" 
+                                @click="openChannelForm = !openChannelForm"
                             />
                         </button>
                     </div>
@@ -86,7 +86,7 @@ $createChannel = fn (string $name) => Channel::create(['name' => $name]);
                         placeholder="general"
                         @keyup.enter="openChannelForm = false; $wire.createChannel($event.target.value)"
                     />
-                </li>   
+                </li>
 
                 <li>
                     <ul x-cloak x-show="open">
@@ -164,7 +164,7 @@ Alpine.data('channels', () => {
         openChannelForm: false,
 
         init() {
-            Echo.join('workspace')
+            Echo.join('workspace').here((event) => console.log(event))
                 .listen('.ChannelCreated', (event) => {
                     this.$wire.channels.push(event.model)
                 })
